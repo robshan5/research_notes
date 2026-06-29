@@ -22,3 +22,27 @@
 - I don't really understand this but they say it all allowed them the precisely tune the amount of communication until it's an acceptable fraction of the amount of computation (???)
 - Ok, I figured it out, basically they only let some of the layers to access all the layer maps on both GPUs but other layers can only access layer maps on one GPU so it is computationally less expensive :)
 - This communication improved they error rates by 1.7% and 1.2%
+## Local Response Normalisation
+- Hyperparameters set are: 
+$$
+k=2; n=5; \alpha = 10^{-4}; \beta = 0.75
+$$
+- remember these for experiment reconstruction
+## Overlapping Pooling
+- They used overlapping pooling layers which means pooling units are allowed to share pixels in the image, they are not mutually exclusive to one pooling unit![[Pasted image 20260629214559.png|438]]
+- This reduced the top-1 and top-5 error rates by 0.4% and 0.3% respectively
+## Overall Architecture
+- Eight weighted layers: five convolutional, three full-connected layers
+- Final layer is fed into a 1000-way softmax a prediction probability for each of the 1000 possible labels for a given input
+- Kernels of the $2^{nd}$, $4^{th}$ and $5^{th}$ convolutional layers are connected the the kernel maps in the previous layer on the same GPU
+- The kernel on the $3^{rd}$ layer are connected to all kernel maps in the $2^{nd}$ 
+- All the full-connected layers are connected to all neurons in the previous layer
+- [[#Local Response Normalisation|Response Normalisation]]  come after the first and second convolutional layers
+- Max-pooling layers come aftter the response normalization layer and the fifth convoultional layer
+![CNN Architecture](2026-06-29-220805_hyprshot.png)
+- First conv. layer filters 225x224x3 with 96 kernels of size 11x11x3 with stride of 4 pixels
+- Second conv. layer has 256 kernels of size 5x5x48
+- Third conv. layer has 384 kernels of size 3x3x256
+- Fourth conv. layer has 384 kernels of size 3x3x192
+- Fifth conv. layer has 256 kernels of size 3x3x192
+- All fully-connected layers have 4096 neurons each
