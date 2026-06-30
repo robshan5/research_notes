@@ -46,3 +46,20 @@ $$
 - Fourth conv. layer has 384 kernels of size 3x3x192
 - Fifth conv. layer has 256 kernels of size 3x3x192
 - All fully-connected layers have 4096 neurons each
+# Reducing Overfitting
+- Model has 60 mil params -> prone to overfitting 
+- They use two different ways to avoid this
+## Data Augmentation
+- If there is not enough data to learn all of the parameters, we can just artificially enlarge the images giving us more data to train
+- Use the CPU to enlarge the images
+- They get random patches of the larger images and their horizontal reflection to increase the training set by a factor of 2048
+- In test time, they take the test image and get five patches of it and average the overall prediction on the prediction of each of the patches
+- They also alter the intensities of the RGB channels (PCA on a set of pixel values)
+- To each RGB image pixel $I_{x y} = [I_{xy}^R, I_{xy}^G, I_{xy}^B]^T$ we add
+ $$
+ [\textbf{p}_1, \textbf{p}_2, \textbf{p}_3][\alpha_1\lambda_1, \alpha_2\lambda_2, \alpha_3\lambda_3]^T
+ $$
+
+ - don't fully understand this but it's just augmenting the RGB values according to the vector's eigenvalues and a random number
+ - $\textbf{p}_i$ and $\lambda_i$  are the $i$th eigenvector and eigenvalue of the 3x3 covariance matrix of the pixels and $\alpha_i$ is the random number on a normal distribution
+ - This creates diversity within the same image allowing the network to generalise well without needing completely new data
