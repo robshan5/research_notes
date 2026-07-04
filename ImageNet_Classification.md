@@ -63,3 +63,53 @@ $$
  - don't fully understand this but it's just augmenting the RGB values according to the vector's eigenvalues and a random number
  - $\textbf{p}_i$ and $\lambda_i$  are the $i$th eigenvector and eigenvalue of the 3x3 covariance matrix of the pixels and $\alpha_i$ is the random number on a normal distribution
  - This creates diversity within the same image allowing the network to generalise well without needing completely new data
+## Dropout
+- Technique of combining predictions of different models in a more effective way. This will allow the model to reduce test error
+- Sets the output of each hidden neuron to 0 with probability 0.5 during training
+- During training, these neurons set to 0 don't contribute to the model learning so when an input is presented, the network samples a different architecture. This reduced co-dependence of neurons since, if neurons have a 50% chance of being put to 0, other neurons can't depend on others when making a prediction
+- This makes the neurons learn more complex patterns in the data, hence making it more effective
+- During testing we half each neuron output by 0.5
+- They use dropout in the first two fully-connected layers. With this enabled they saw a lot of overfitting
+# Details of Learning
+- Stochastic gradient descent, batch size = 128, momentum = 0.9, weight decay = 0.0005
+- Weight decay improves the model performance on top of regularising the network
+- The update rule:
+$$
+\begin{gathered}
+v_{i+1} := 0.9\cdot v_i = 0.0005 \cdot \epsilon \cdot w_i - \epsilon \cdot \langle \frac{\partial L}{\partial w}|_{w_i}\rangle_{D_i}\\
+w_{i+1} := w_i + v_{i+1}
+\end{gathered}
+$$
+where $i$ is the iteration index
+$v$ is the momentum variable
+$\epsilon$ is the learning rate
+and $\langle \frac{\partial L}{\partial w}|_{w_i}\rangle_{D_i}$ is the average over the $i$th batch $D_i$ of the derivative of the objective function with respect to $w$ evaluated at $w_i$ 
+
+- They used Gausian weight initialisation with $\mu=0$ and $\sigma=0.01$ 
+- They initialised the neuron biases in the second, fourth and fifth convolutional layers and the fully-connected hidden layers with constant 1
+- Then they initialised the remaining neuron biases with constant 0
+- The positive biases given to the ReLUs allowed the network to learn faster during the early stages
+- Each layer has the same learning rate (initialised to 0.01)-> adjusted this manually throughout training. They divided the learning rate by 10 when the validation error rate stopped improving (this happened three times during training)
+- It was trained for around 90 cycles through the 1.2 mil images (this took 5-6 days on their hardware)
+# Results
+- They achieved a top-1 test error rate of 37.5% and a top-5 test error rate pf 17% tested on the ILSVRC-2010 dataset. Others (Sparse coding and SIFT+FVs) are shown to be outperformed by the CNN
+
+| Model         | Top-1     | Top-5     |
+| ------------- | --------- | --------- |
+| Sparse coding | 47.1%     | 28.2%     |
+| SIFT + FVs    | 45.7%     | 25.7%     |
+| CNN           | **37.5%** | **17.0%** |
+
+- They also tested it on the ImageNet dataset (Fall 2009) -> here they were only given half the dataset and the other half to test it. They got top-1 and top-5 error rates of 67.4% and 40.9%. In this they also used a sixth convolutional layer over the last pooling layer
+
+| Model               | Top-1 (val) | Top-5 (val) | Top-5 (test) |
+| ------------------- | ----------- | ----------- | ------------ |
+| *SIFT + FVs*        | -           | -           | *26.2%*      |
+| 1 CNN               | 40.7%       | 18.2%       | -            |
+| 5 CNNs              | 38.1%       | 16.4%       | **16.4%**    |
+| 1 CNN (pretrained)  | 39.0%       | 16.6%       | -            |
+| 7 CNNs (pretrained) | 36.7%       | 15.4%       | **15.3%**    |
+## Qualitative Evaluations
+- Because of the limited connectivity of the GPUs, they have become specialised in different aspects of classification; GPU1 mostly only learned shaped and patterns while GPU2 is more focused on the colours
+![[Pasted image 20260704193134.png|655]]
+
