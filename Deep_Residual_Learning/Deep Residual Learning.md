@@ -1,7 +1,7 @@
 # Abstract
 - They are presenting an easier way to optimise deep neural networks
 - They reformulate the layers as learning residual functions with reference to layer inputs instead of learning unreferenced functions
-- They achieved a 3.57% error rate (top-5) on the ImageNet test set which was just three years after AlexNet which was at around 12% error (top-5)
+- They achieved a 3.57% error rate (top-5) on the ImageNet test set which was just three years after [[ImageNet_Classification#Results]] which was at around 17% error (top-5)
 - Deep residual nets are the focus of this paper
 # Introduction
 - Depth is very important for the performance of a neural network - works done on vision models up to that point used deep networks

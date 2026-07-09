@@ -13,6 +13,20 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "Deep_Residual_Learning/Deep Residual Learning.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Deep Residual Learning"
+            }
+          },
+          {
+            "id": "67f316445fb4bc5d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "ImageNet_Classification/ImageNet_Classification.md",
                 "mode": "source",
                 "source": false
@@ -20,23 +34,8 @@
               "icon": "lucide-file",
               "title": "ImageNet_Classification"
             }
-          },
-          {
-            "id": "33423e310c0c674d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Deep_residual_learning_for_image_recognition/Deep Residual Learning.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Deep Residual Learning"
-            }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -199,9 +198,11 @@
       "bases:Create new base": false
     }
   },
-  "active": "33423e310c0c674d",
+  "active": "4a68d996e3932773",
   "lastOpenFiles": [
     "ImageNet_Classification/ImageNet_Classification.md",
+    "Deep_Residual_Learning/Deep Residual Learning.md",
+    "Untitled.md",
     "Deep_residual_learning_for_image_recognition/Deep Residual Learning.md",
     "Deep_residual_learning_for_image_recognition",
     "ImageNet_Classification.md",
