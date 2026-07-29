@@ -4,35 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "016e8cf78f425e6b",
+        "id": "d9339fafe65f8f7e",
         "type": "tabs",
         "children": [
           {
-            "id": "4a68d996e3932773",
+            "id": "97a5fde6d5275cb0",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "ImageNet_Classification/ImageNet_Classification.md",
+                "file": "Deep_Residual_Learning/Deep Residual Learning.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ImageNet_Classification"
-            }
-          },
-          {
-            "id": "67f316445fb4bc5d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "ImageNet_Classification/ImageNet_Classification.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "ImageNet_Classification"
+              "title": "Deep Residual Learning"
             }
           }
         ]
@@ -197,16 +183,18 @@
       "bases:Create new base": false
     }
   },
-  "active": "4a68d996e3932773",
+  "active": "97a5fde6d5275cb0",
   "lastOpenFiles": [
+    "linear projection.md",
+    "mapping.md",
+    "Deep_Residual_Learning/Deep Residual Learning.md",
+    "ImageNet_Classification/ImageNet_Classification.md",
     "Deep_Residual_Learning/2026-07-12-214827_hyprshot.png",
     "Deep_Residual_Learning/Pasted image 20260712215116.png",
     "ImageNet_Classification/2026-06-29-220805_hyprshot.png",
     "ImageNet_Classification/Pasted image 20260629214559.png",
     "ImageNet_Classification/Pasted image 20260704193134.png",
-    "Deep_Residual_Learning/Deep Residual Learning.md",
     "Untitled.md",
-    "ImageNet_Classification/ImageNet_Classification.md",
     "Deep_residual_learning_for_image_recognition/Deep Residual Learning.md",
     "Deep_residual_learning_for_image_recognition",
     "ImageNet_Classification.md",

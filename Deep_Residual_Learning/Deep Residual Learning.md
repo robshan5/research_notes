@@ -31,5 +31,42 @@
  $$
  where $\textbf{x}$ and $\textbf{y}$ are the input and output variables and the function $F(\textbf{x}, \{W_i\})$ 
  - This equation avoids adding extra computation complexity and more parameters (nodes)
- - For this to work $\textbf{x}$ and $F$ need to be the same, but if they aren't, a linear projection just needs to be performed on $\textbf{x}$ to match the dimensions of $F$
+ - For this to work $\textbf{x}$ and $F$ need to be the same, but if they aren't, a [[linear projection]] just needs to be performed on $\textbf{x}$ to match the dimensions of $F$ ^mapping
  - While this is also just for a simple fully-connected layer, this can also work for a convolutional layer
+# Architectures
+### Plain Networks
+- 34 weighted layers
+- 3x3 filters in convolutional layers
+- the layers have the same number of filters for the same size feature map
+- if the feature map size is halved, the filter count is doubled
+- Used as a control for the [[#Experiments]]
+### Residual Network
+- Same as the plain network but this shortcut connections (always skips two layers)
+- Some layers have different dimensions so the [[#^mapping|mapping]] is used or the extra dimensions are padded with 0s ^0padding
+## Implementation
+- Image is randomly cropped (or it's horizontal flip) to fit the 224x224 size
+- Standard colour augmentation is used
+- Use batch normalisation after each convolution and before each activation
+# Experiments
+## ImageNet Classification
+- ImageNet 2012 is used, same as [[ImageNet_Classification|AlexNet]]
+### Plain Networks
+- 18-layer and then 34-layers
+- deeper network has a higher validation error (28.54% compared to 27.94% in top-1 error) & higher training error
+### Residual Networks
+- the 34-layer network outperformed the 18-layer
+
+| Network   | ResNet    | Plain |
+| --------- | --------- | ----- |
+| 18 layers | 27.88     | 27.94 |
+| 34 layers | **25.03** | 25.03 |
+
+- Used identity mapping for the shortcuts and [[#^0padding|0 padding]] for the extra dimensions
+#### Identity vs. Projection Shortcuts
+- Using shortcuts improves the performance of the model although the type of projection shortcut doesn't really matter
+#### Deeper Bottleneck Architectures
+- parameter-free identity shortcuts are important for the bottleneck architectures (skips 1x1, 3x3, 1x1 layers) -> keeps time complexity low
+
+#### 50-layer ResNet
+- replace 2-layer block with the bottleneck block in the 34-layer net -> creates a 50-layer net
+- They created 101-layer and 152 layer that each improved accuracy meaning the deeper a ResNet goes, the better it will perform
