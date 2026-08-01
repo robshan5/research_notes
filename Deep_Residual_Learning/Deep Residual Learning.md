@@ -70,3 +70,16 @@
 #### 50-layer ResNet
 - replace 2-layer block with the bottleneck block in the 34-layer net -> creates a 50-layer net
 - They created 101-layer and 152 layer that each improved accuracy meaning the deeper a ResNet goes, the better it will perform
+#### Comparisons with State of the art Methods
+- The 152-layer ResNet outperformed all previous ensemble results and won 1st place in ILSVRC-2015
+## CIFAR-10 and Analysis
+- They once again show that deep plain networks are harder to optimise while resnets are easier to optimise at high depth and also come with better test accuracy
+- The 110 resnet performs on par with the sampled state of the art while having less parameters but a much higher depth (110 layers to 19 layers in Highway)
+### Analysis of Layer Responses
+- They found that the deeper the ResNet gets the less each layer tends to modify the signal, while plain networks will modify it a lot more, this may be a key insight into how they are able to outperform plain networks
+### Exploring Over 1000 layers
+- They tested models over 1000 layers and they still didn't find any issues with optimisation
+- They did find that the test error grew compared to the 110 layer model, this may be because of overfitting (the model has too many parameters for the size of the given dataset)
+## Object Detection on PASCAL and MS COCO
+- On the PASCAL VOC it outperforms VGG-16
+- On the COCO dataset they got a 6% increase from the standard metric
